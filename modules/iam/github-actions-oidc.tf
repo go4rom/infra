@@ -46,10 +46,15 @@ data "aws_iam_policy_document" "github_actions_assume_role" {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
       values = [
-        "repo:${var.github_org}/frontend:ref:refs/heads/main",
-        "repo:${var.github_org}/frontend:ref:refs/heads/develop",
-        "repo:${var.github_org}/backend:ref:refs/heads/main",
-        "repo:${var.github_org}/backend:ref:refs/heads/develop",
+
+        "repo:${var.github_org}@302767931/zen-pharma-backend@1369955284:ref:refs/heads/main",
+        "repo:${var.github_org}@302767931/zen-pharma-backend@1369955284:ref:refs/heads/develop",
+        "repo:${var.github_org}@302767931/zen-pharma-frontend@1369945964:ref:refs/heads/main",
+        "repo:${var.github_org}@302767931/zen-pharma-frontend@1369945964:ref:refs/heads/develop",
+        #"repo:${var.github_org}/frontend:ref:refs/heads/main",
+        #"repo:${var.github_org}/frontend:ref:refs/heads/develop",
+        #"repo:${var.github_org}/backend:ref:refs/heads/main",
+        #"repo:${var.github_org}/backend:ref:refs/heads/develop",
       ]
     }
   }
