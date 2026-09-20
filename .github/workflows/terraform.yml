@@ -34,7 +34,7 @@ permissions:
 env:
   TF_VERSION: '1.15.6'
   AWS_REGION: us-east-1
-  TF_STATE_BUCKET: zen-pharma-terraform-state-dpp-2026
+  TF_STATE_BUCKET: zen-pharma-terraform-state-go4rom
 
 # Prevent parallel runs on the same branch — avoids state conflicts
 concurrency:
@@ -96,7 +96,7 @@ jobs:
       - name: Release state lock on failure
         if: failure() || cancelled()
         run: |
-          aws s3 rm s3://${{ vars.TF_STATE_BUCKET }}/envs/dev/terraform.tfstate.tflock || true
+          aws s3 rm s3://${{ env.TF_STATE_BUCKET }}/envs/dev/terraform.tfstate.tflock || true
 
       - name: Upload plan file
         if: steps.plan.outcome == 'success'
@@ -153,7 +153,7 @@ jobs:
       - name: Release state lock on failure
         if: failure() || cancelled()
         run: |
-          aws s3 rm s3://${{ vars.TF_STATE_BUCKET }}/envs/dev/terraform.tfstate.tflock || true
+          aws s3 rm s3://${{ env.TF_STATE_BUCKET }}/envs/dev/terraform.tfstate.tflock || true
 
   # ── Destroy ───────────────────────────────────────────────────────────────
   destroy:
@@ -198,4 +198,4 @@ jobs:
       - name: Release state lock on failure
         if: failure() || cancelled()
         run: |
-          aws s3 rm s3://${{ vars.TF_STATE_BUCKET }}/envs/dev/terraform.tfstate.tflock || true
+          aws s3 rm s3://${{ env.TF_STATE_BUCKET }}/envs/dev/terraform.tfstate.tflock || true
